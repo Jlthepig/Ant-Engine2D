@@ -1,0 +1,6 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Release\) contains files shared from another project (SFML.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+C:\Users\jarri\Desktop\VIsualStudioProjects\Ant2D\main.cpp(104,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\jarri\Desktop\VIsualStudioProjects\Ant2D\main.cpp(104,31): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+main.obj : error LNK2001: unresolved external symbol "void __cdecl ImGui::ShowDemoWindow(bool *)" (?ShowDemoWindow@ImGui@@YAXPEA_N@Z)
+C:\Users\jarri\Desktop\VIsualStudioProjects\Ant2D\x64\Release\Ant 2d.exe : fatal error LNK1120: 1 unresolved externals
