@@ -1,21 +1,25 @@
 #include <iostream>
 #include "Window.hpp"
+#include "GameObject.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
 int main() {
     Ant2D::window w;
+    Ant2D::GameObject GO;
+
+    GO.AddRectangle(sf::Color::Red,100.0f,100.0f);
 
     // Get desktop resolution
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    sf::RenderWindow window{ sf::VideoMode(desktop.width, desktop.height), "Ant Engine 2D" };
+    sf::RenderWindow Rwindow{ sf::VideoMode(desktop.width, desktop.height), "Ant Engine 2D" };
 
-    // Initialize ImGui
-    if (ImGui::SFML::Init(window))
-    {
-        std::cout << "ImGui initialized succsessfully\n";
-   }
+        // Initialize ImGui;
+        if (ImGui::SFML::Init(Rwindow))
+        {
+            std::cout << "ImGui initialized succsessfully\n";
+        }
     auto& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
@@ -36,19 +40,19 @@ int main() {
 
     // Main loop
     sf::Clock deltaClock{};
-    while (window.isOpen()) {
+    while (Rwindow.isOpen()) {
         // Process events
         sf::Event event{};
-        while (window.pollEvent(event)) {
-            ImGui::SFML::ProcessEvent(window, event);
+        while (Rwindow.pollEvent(event)) {
+            ImGui::SFML::ProcessEvent(Rwindow, event);
 
             if (event.type == sf::Event::Closed) {
-                window.close();
+                Rwindow.close();
             }
         }
 
         // Update ImGui
-        ImGui::SFML::Update(window, deltaClock.restart());
+        ImGui::SFML::Update(Rwindow, deltaClock.restart());
 
         // Push custom font and create dock space
         ImGui::PushFont(fancyFont);
@@ -60,6 +64,13 @@ int main() {
         }
         ImGui::End();
 
+        if (ImGui::Begin("Viewport")) {
+            // Content for Viewport
+            
+        }
+        ImGui::End();
+
+
         // Render ToolBar window
         if (ImGui::Begin("ToolBar")) {
             // Content for ToolBar window
@@ -69,9 +80,10 @@ int main() {
         ImGui::PopFont();
 
         // Clear window and render ImGui content
-        window.clear();
-        ImGui::SFML::Render(window);
-        window.display();
+        Rwindow.clear();
+        ImGui::SFML::Render(Rwindow);
+        GO.RenderRectangle(&Rwindow);
+        Rwindow.display();
     }
 
     // Shutdown ImGui
